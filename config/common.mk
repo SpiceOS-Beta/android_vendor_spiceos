@@ -54,6 +54,10 @@ $(foreach f,$(wildcard vendor/lineage/prebuilt/common/etc/init/*.rc),\
 PRODUCT_COPY_FILES += \
     vendor/lineage/prebuilt/common/lib/content-types.properties:$(TARGET_COPY_OUT_SYSTEM)/lib/content-types.properties
 
+# Gestures
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
+
 # Enable Android Beam on all targets
 PRODUCT_COPY_FILES += \
     vendor/lineage/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
