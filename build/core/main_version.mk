@@ -10,7 +10,11 @@ ADDITIONAL_BUILD_PROPERTIES += \
     ro.lineage.releasetype=$(LINEAGE_BUILDTYPE) \
     ro.lineage.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
     ro.modversion=$(LINEAGE_VERSION) \
-    ro.lineagelegal.url=https://lineageos.org/legal
+    ro.lineagelegal.url=https://lineageos.org/legal \
+    ro.spiceos.build.version=$(SPICEOS_VERSION) \
+    ro.spiceos.version.flavor=SpiceOS \
+    ro.spiceos.version.code=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
+    ro.spiceos.build.variant=$(SPICEOS_BUILDTYPE)
 
 # LineageOS Platform Display Version
 ADDITIONAL_BUILD_PROPERTIES += \
