@@ -2,6 +2,7 @@
 $(call inherit-product-if-exists, vendor/extra/product.mk)
 $(call inherit-product-if-exists, vendor/overlays/config.mk)
 $(call inherit-product-if-exists, external/faceunlock/config.mk)
+$(call inherit-product, vendor/gapps/gms.mk)
 
 PRODUCT_BRAND ?= SpiceOS
 
