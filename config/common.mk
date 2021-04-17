@@ -125,7 +125,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LineageThemesStub \
 		OmniStyle \
-    ThemePicker
+    ThemePicker \
+		StitchImage
 
 # Config
 PRODUCT_PACKAGES += \
