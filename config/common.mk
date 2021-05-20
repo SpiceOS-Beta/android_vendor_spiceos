@@ -131,6 +131,13 @@ PRODUCT_PACKAGES += \
     ThemePicker \
 		StitchImage
 
+# Volume Panel styles
+PRODUCT_PACKAGES += \
+	AospPanel \
+	CompactPanel \
+	OreoPanel \
+	TiledPanel
+
 # Config
 PRODUCT_PACKAGES += \
     SimpleDeviceConfig
