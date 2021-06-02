@@ -17,7 +17,8 @@ PRODUCT_PACKAGES += \
     Backgrounds \
     Eleven \
     Etar \
-    Jelly \
+		TrichromeChrome	\
+		TrichromeWebView	\
     Profiles \
     Seedvault
 
