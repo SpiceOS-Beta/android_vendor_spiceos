@@ -15,7 +15,7 @@ PRODUCT_PACKAGES += \
 # Lineage packages
 PRODUCT_PACKAGES += \
     Backgrounds \
-    Eleven \
+		Phonograph \
     Etar \
 		TrichromeChrome	\
 		TrichromeWebView	\
