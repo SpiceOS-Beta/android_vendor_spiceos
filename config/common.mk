@@ -3,19 +3,6 @@ $(call inherit-product-if-exists, vendor/extra/product.mk)
 $(call inherit-product-if-exists, vendor/overlays/config.mk)
 $(call inherit-product-if-exists, external/faceunlock/config.mk)
 
-# include MindTheGapps inline vendor_gapps
-ifeq ($(TARGET_ARCH), arm64)
-$(call inherit-product-if-exists, vendor/gapps/arm64/arm64-vendor.mk)
-endif
-
-ifeq ($(TARGET_ARCH), arm)
-$(call inherit-product-if-exists, vendor/gapps/arm/arm-vendor.mk)
-endif
-
-ifneq ($(filter x86 x86_64,$(TARGET_ARCH)),)
-$(call inherit-product-if-exists, vendor/gapps/x86/x86-vendor.mk)
-endif
-
 PRODUCT_BRAND ?= SpiceOS
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
@@ -256,4 +243,6 @@ endif
 endif
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
+# include MindTheGapps inline vendor_gapps
+-include vendor/lineage/config/gms.mk
 -include vendor/lineage/config/partner_gms.mk
