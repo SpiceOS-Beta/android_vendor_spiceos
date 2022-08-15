@@ -15,6 +15,15 @@
 # limitations under the License.
 #
 
+ifeq ($(TARGET_SCREEN_WIDTH),)
+    $(warning TARGET_SCREEN_WIDTH is not set, using default value: 1080)
+    TARGET_SCREEN_WIDTH := 1080
+endif
+ifeq ($(TARGET_SCREEN_HEIGHT),)
+    $(warning TARGET_SCREEN_HEIGHT is not set, using default value: 1920)
+    TARGET_SCREEN_HEIGHT := 1920
+endif
+
 TARGET_GENERATED_BOOTANIMATION := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATION/bootanimation.zip
 $(TARGET_GENERATED_BOOTANIMATION): INTERMEDIATES := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATION
 $(TARGET_GENERATED_BOOTANIMATION): $(SOONG_ZIP)
@@ -22,25 +31,18 @@ $(TARGET_GENERATED_BOOTANIMATION): $(SOONG_ZIP)
 	@rm -rf $(dir $@)
 	@mkdir -p $(dir $@)
 	$(hide) tar xfp vendor/spiceos/bootanimation/bootanimation.tar -C $(INTERMEDIATES)
-	$(hide) if [ $(TARGET_SCREEN_HEIGHT) -lt $(TARGET_SCREEN_WIDTH) ]; then \
-	    IMAGEWIDTH=$(TARGET_SCREEN_HEIGHT); \
-	else \
-	    IMAGEWIDTH=$(TARGET_SCREEN_WIDTH); \
-	fi; \
-	IMAGESCALEWIDTH=$$IMAGEWIDTH; \
-	IMAGESCALEHEIGHT=$$(expr $$IMAGESCALEWIDTH / 3); \
-	if [ "$(TARGET_BOOTANIMATION_HALF_RES)" = "true" ]; then \
-	    IMAGEWIDTH="$$(expr "$$IMAGEWIDTH" / 2)"; \
-	fi; \
-	IMAGEHEIGHT=$$(expr $$IMAGEWIDTH / 3); \
+	$(hide)
+	IMAGEWIDTH=$(TARGET_SCREEN_WIDTH); \
+	IMAGEHEIGHT=$(TARGET_SCREEN_HEIGHT); \
 	RESOLUTION="$$IMAGEWIDTH"x"$$IMAGEHEIGHT"; \
 	for part_cnt in 0 1 2 3 4; do \
 	    mkdir -p $(INTERMEDIATES)/part$$part_cnt; \
 	done; \
 	prebuilts/tools-lineage/${HOST_OS}-x86/bin/mogrify -resize $$RESOLUTION -colors 250 $(INTERMEDIATES)/*/*.png; \
-	echo "$$IMAGESCALEWIDTH $$IMAGESCALEHEIGHT 60" > $(INTERMEDIATES)/desc.txt; \
+	echo "$$IMAGEWIDTH $$IMAGEHEIGHT 60" > $(INTERMEDIATES)/desc.txt; \
 	cat vendor/spiceos/bootanimation/desc.txt >> $(INTERMEDIATES)/desc.txt
 	$(hide) $(SOONG_ZIP) -L 0 -o $(TARGET_GENERATED_BOOTANIMATION) -C $(INTERMEDIATES) -D $(INTERMEDIATES)
+
 
 ifeq ($(TARGET_BOOTANIMATION),)
     TARGET_BOOTANIMATION := $(TARGET_GENERATED_BOOTANIMATION)
