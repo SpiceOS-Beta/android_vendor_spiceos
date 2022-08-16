@@ -157,9 +157,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     rsync
 
-# ThemeOverlays
-include vendor/overlays/themes.mk
-
 # Storage manager
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.storage_manager.enabled=true
@@ -183,17 +180,6 @@ PRODUCT_PACKAGES += \
 endif
 endif
 
-# Face Unlock
-TARGET_FACE_UNLOCK_SUPPORTED ?= true
-ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
-PRODUCT_PACKAGES += \
-    FaceUnlockService
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.face_unlock_service.enabled=$(TARGET_FACE_UNLOCK_SUPPORTED)
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
-endif
-
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
@@ -201,11 +187,11 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/spiceos/overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/spiceos/overlay/common
 
-PRODUCT_VERSION_MAJOR = 5
-PRODUCT_VERSION_MINOR = 5
+PRODUCT_VERSION_MAJOR = 6
+PRODUCT_VERSION_MINOR = 0
 
 SPICEOS_BUILDTYPE ?= UNOFFICIAL
-SPICEOS_EDITION := STABLE
+SPICEOS_EDITION := ALPHA
 
 SPICEOS_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(SPICEOS_EDITION)-$(shell date +%Y%m%d-%H%M%S)-$(SPICEOS_BUILD)-$(SPICEOS_BUILDTYPE)
 SPICEOS_DISPLAY_VERSION := SpiceOS-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(SPICEOS_EDITION)-$(SPICEOS_BUILD)-$(SPICEOS_BUILDTYPE)
